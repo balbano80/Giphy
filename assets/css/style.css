@@ -62,6 +62,10 @@ img{
     margin-top: 2px;
 }
 
+.input-group-prepend{
+    color: #191970;
+}
+
 .form-control{
     font-family: Arial, Helvetica, sans-serif;
 }
