@@ -1,7 +1,7 @@
 //api key - hHd2CWeLr5RA62XeJumOmFy6eO0sv7hk
 
 $(function() {
-    var topics = ["warriors", "nba", "movies"];
+    var topics = ["golden state warriors", "nba", "movies", "the office", "game of thrones", "westworld", "skyline-gtr", "san jose sharks"];
     //button topics
 
     function btnDisplay(){
@@ -10,6 +10,7 @@ $(function() {
             var tempBtn = $("<button>");
             tempBtn.text(topics[i]);
             tempBtn.attr("id", "gifBtn")
+            tempBtn.attr("class", "btn m-2 btn-secondary");          
             tempBtn.attr("subject", topics[i]);
             $("#buttons").append(tempBtn);
         }
