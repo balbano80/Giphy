@@ -2,6 +2,7 @@
 
 $(function() {
     var topics = ["warriors", "nba", "movies"];
+    //button topics
 
     function btnDisplay(){
         $("#buttons").empty();
@@ -12,13 +13,12 @@ $(function() {
             tempBtn.attr("subject", topics[i]);
             $("#buttons").append(tempBtn);
         }
-    }
+    }// emptying div holding buttons, looping through the array of topics and creating a button for each
     function newBtn(){
         var searchTerm = $("#search-term").val().trim();
-        console.log(searchTerm);
         topics.push(searchTerm);
         btnDisplay();
-    }
+    }// taking value in input field, pushing it onto topics array, and re-displaying buttons
 
     btnDisplay();
 
@@ -29,7 +29,7 @@ $(function() {
             url: queryUrl,
             method: "GET"
         }).then(function(response){
-            // console.log(response.data);
+            console.log(response.data);
             for (var j = 0; j < response.data.length; j++){
                 var movingLink = response.data[j].images.fixed_height.url;
                 console.log(movingLink);
@@ -40,15 +40,18 @@ $(function() {
                 newImg.attr("rating", response.data[j].rating);
                 newImg.attr("data-state", "still");
                 $("#gif-section").prepend("<p>Rating: " + response.data[j].rating + "<p>");
+                $("#gif-section").prepend("<p>Title: " + response.data[j].title + "<p>");
                 $("#gif-section").prepend(newImg);
             }
         })
-    });
+    }); // takes buttons sujbject attribute, reaches out to Giphy API and returns an array containing 10 results.
+        // Loops through array, creates images for each with pertaining attributes.  Also displays ratings for each.
 
-    $(document).on("click", "#searchBtn", function(){
+    $(document).on("click", "#searchBtn", function(event){
+        event.preventDefault();
         newBtn();
         document.getElementById($(".form-control").val(""));
-    });
+    });// calls new button function and clears the input field
 
     $(document).on("click", "img", function(){
         if($(this).attr("data-state") === "still"){
@@ -59,5 +62,5 @@ $(function() {
             $(this).attr("src", $(this).attr("still"));
             $(this).attr("data-state", "still");
         }
-    })
+    })// switching src url for image between still and moving based on current state
 })
